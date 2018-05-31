@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public class Category {
+        private int id;
+        private String nome;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

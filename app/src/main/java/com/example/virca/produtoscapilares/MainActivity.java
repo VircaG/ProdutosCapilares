@@ -1,5 +1,6 @@
 package com.example.virca.produtoscapilares;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,10 +28,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public class Category {
-        private int id;
-        private String nome;
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

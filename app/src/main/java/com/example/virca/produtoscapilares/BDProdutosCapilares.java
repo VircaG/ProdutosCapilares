@@ -15,7 +15,10 @@ public class BDProdutosCapilares extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        BDTableCategory bdTableCategory = new BDTableCategory(db);
+        bdTableCategory.create();
+        BDTableProduto bdTableProduto = new BDTableProduto(db);
+        bdTableProduto.create();
     }
 
     @Override

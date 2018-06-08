@@ -16,7 +16,6 @@ public class BDTableProduto implements BaseColumns {
 
         db.execSQL("CREATE TABLE PRODUTOS(ID INTEGER PRIMARY KEY AUTOINCREMENT," + FIELD_NOME + " TEXT NOT NULL," +
                 FIELD_QUANTIDADE + " INTENGER ," + FIELD_ID_CATEGORY + " INTEGER,FOREIGN KEY" +
-                " (" + FIELD_ID_CATEGORY + ") " +
-                "REFERENCES category("+BDTableCategory._ID+"))");
+                " (" + FIELD_ID_CATEGORY + ") " + "REFERENCES category("+BDTableCategory._ID+"))");
     }
 }

@@ -50,11 +50,16 @@ public class BDTableCategory implements BaseColumns {
 
 
 
+      public int update(ContentValues values, String whereClause, String [] whereArgs){
+        return  db.update(TABLE_NAME,values,whereClause,whereArgs);
+      }
 
 
-        //public int delete(String whereClause,String[] whereArgs){
-        //return db.insert(TABLE_NAME,whereClause,whereArgs);
-    //}
+
+
+        public int delete(String whereClause,String[] whereArgs){
+        return db.delete(TABLE_NAME,whereClause,whereArgs);
+    }
     public Cursor query(String [] columns ,String selection,
                         String[] selectionArgs,String groupBy,String having,
                         String orderBy){

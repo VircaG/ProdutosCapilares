@@ -52,6 +52,30 @@ public class ProdutosCapilaresDBText {
         category.setNome("Scifi");
 
         //Insert/create (C)RUD
+        long id = insertCategory(tableCategory,category);
+         // query/read C(R)UD
+        category = ReadFirsCategory(tableCategory,"Scifi",id);
+
+        //update CR(U)D
+        category.setNome("Sci-fi");
+        int rowsAffected = tableCategory.update(
+                BDTableCategory.getContentValues(category),
+                BDTableCategory._ID + "=?",
+                new String [] {Long.toString(id)}
+
+                );
+        assertEquals("Falha na atualização da categoria",1,rowsAffected);
+        //query/read C(R)UD
+        category = ReadFirsCategory(tableCategory,"Sci-fi",id);
+
+        //delete CRU(D)
+        rowsAffected = tableCategory.delete(
+                BDTableCategory._ID + "=?",
+                new String []{Long.toString(id)});
+        assertEquals("Falha ão eliminar a categoria",1,rowsAffected);
+
+        Cursor cursor = tableCategory.query( BDTableCategory.AllColunas,null,null,null,null,null);
+        assertEquals("Categorias encontradas após a exclusão ???",0,cursor.getCount());
     }
 
     private long insertCategory(BDTableCategory tableCategory, Category category){

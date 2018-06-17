@@ -6,18 +6,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
 public class BDTableCategory implements BaseColumns {
-    public static final String FIELD_NOME = "nome";
-    public static final String _ID = "ID";
-    public static final String TABLE_NAME = "categorias";
-    private SQLiteDatabase db;
+    private static final String FIELD_NOME = "nome";
 
+    public static final String TABLE_NAME = "categorias";
+
+
+    public static final String  [] AllColunas = new String[] {_ID, FIELD_NOME};
+    private SQLiteDatabase db;
 
     public BDTableCategory(SQLiteDatabase db){
         this.db = db;
     }
     public void create(){
-        db.execSQL("CREATE TABLE category(" + FIELD_NOME + "" +
-                " TEXT NOT NULL," + _ID + " " +
+        db.execSQL(
+                "CREATE TABLE " + TABLE_NAME + "(" + FIELD_NOME +
+                " TEXT NOT NULL," + _ID +
                 "INTEGER PRIMARY KEY AUTOINCREMENT)"
         );
     }
@@ -49,9 +52,9 @@ public class BDTableCategory implements BaseColumns {
 
 
 
-        public int delete(String whereClause,String[] whereArgs){
-        return db.insert(TABLE_NAME,whereClause,whereArgs);
-    }
+        //public int delete(String whereClause,String[] whereArgs){
+        //return db.insert(TABLE_NAME,whereClause,whereArgs);
+    //}
     public Cursor query(String [] columns ,String selection,
                         String[] selectionArgs,String groupBy,String having,
                         String orderBy){

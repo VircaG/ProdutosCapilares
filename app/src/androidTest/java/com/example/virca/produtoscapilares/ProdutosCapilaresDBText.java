@@ -72,10 +72,31 @@ public class ProdutosCapilaresDBText {
         rowsAffected = tableCategory.delete(
                 BDTableCategory._ID + "=?",
                 new String []{Long.toString(id)});
+
         assertEquals("Falha ão eliminar a categoria",1,rowsAffected);
 
         Cursor cursor = tableCategory.query( BDTableCategory.AllColunas,null,null,null,null,null);
         assertEquals("Categorias encontradas após a exclusão ???",0,cursor.getCount());
+    }
+    @Test
+    public void ProdutosCapilaresCRUDtest(){
+        BDProdutosCapilares bdProdutosCapilares = new BDProdutosCapilares(getContext());
+        SQLiteDatabase db = bdProdutosCapilares.getWritableDatabase();
+
+        BDTableCategory tableCategory = new BDTableCategory(db);
+
+        Category category = new Category();
+        category.setNome("Shampoo");
+
+        long idCategory = insertCategory(tableCategory,category);
+
+       // BDTableProduto
+
+
+    }
+    private ProdutosCapilares ReadFirstProdutoscapilares( BDTableProduto tableProduto,String expectedNome,int expectedQuantidade, long expectedCategoryId,long expectedId){
+        Cursor cursor = tableProduto.
+
     }
 
     private long insertCategory(BDTableCategory tableCategory, Category category){

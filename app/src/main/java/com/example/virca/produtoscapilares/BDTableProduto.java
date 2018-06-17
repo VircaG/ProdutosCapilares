@@ -1,6 +1,7 @@
 package com.example.virca.produtoscapilares;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
@@ -25,15 +26,32 @@ public class BDTableProduto implements BaseColumns {
                 FIELD_ID_CATEGORY + " INTEGER REFERENCES " + BDTableCategory.TABLE_NAME + "(" + BDTableCategory._ID + ")" +
                 ")");
     }
-  public   static ContentValues getContentValues(ProdutosCapilares produtosCapilares){
-        ContentValues values = new ContentValues();
+  public   static ContentValues getContentValues(ProdutosCapilares produtosCapilares) {
+      ContentValues values = new ContentValues();
 
 
-        values.put(_ID,produtosCapilares.getId());
-          values.put(FIELD_NOME,produtosCapilares.getNome());
-          values.put(FIELD_QUANTIDADE,produtosCapilares.getQuantidade());
-          values.put(FIELD_ID_CATEGORY,produtosCapilares.getQuantidade());
-          values.put(date,produtosCapilares.getDate());
+      values.put(_ID, produtosCapilares.getId());
+      values.put(FIELD_NOME, produtosCapilares.getNome());
+      values.put(FIELD_QUANTIDADE, produtosCapilares.getQuantidade());
+      values.put(FIELD_ID_CATEGORY, produtosCapilares.getQuantidade());
+
+      return values;
+  }
+
+
+  public static Category getCurrentCatergoryFromCursor(Cursor cursor){
+
+        final int posId = cursor.getColumnIndex(_ID);
+        final int posNome = cursor.getColumnIndex(FIELD_NOME);
+      final int posQuantidade = cursor.getColumnIndex(FIELD_QUANTIDADE);
+        final  int posIdCategory = cursor.getColumnIndex(FIELD_ID_CATEGORY);
+
+        ProdutosCapilares produtosCapilaresl = new ProdutosCapilares();
+
+        produtosCapilaresl.setId(cursor.getInt(posId));
+        produtosCapilaresl.setNome(cursor.getString(posNome));
+        produtosCapilaresl.setIdCategory();
+
 
 
 

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Entrada {
     private  int id;
     private int quantidade;
-    private Date date;
+    private String data;
     private int id_produto;
 
     public int getId() {
@@ -24,12 +24,12 @@ public class Entrada {
         this.quantidade = quantidade;
     }
 
-    public Date getDate() {
-        return date;
+    public String getData() {
+        return data;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public int getId_produto() {

@@ -37,12 +37,45 @@ public class BDTableEntradas implements BaseColumns {
         ContentValues values = new ContentValues();
 
         values.put(_ID,entrada.getId());
-        values.put(FIELD_DATA,entrada.getDate());
+        values.put(FIELD_DATA,entrada.getData());
         values.put(FIELD_ID_PRODUTO,entrada.getId_produto());
         values.put(FIELD_QUANTIDADE,entrada.getQuantidade());
 
 
         return values;
     }
-public static Entrada getCurrentCategoryFromCursor(Cursor cursor)
+public static Entrada getCurrentCategoryFromCursor(Cursor cursor){
+      final int posId = cursor.getColumnIndex(_ID);
+      final int posData = cursor.getColumnIndex(FIELD_DATA);
+      final int posIdProduto = cursor.getColumnIndex(FIELD_ID_PRODUTO);
+      final int posquantidade = cursor.getColumnIndex(FIELD_QUANTIDADE);
+
+      Entrada entrada = new Entrada ();
+
+      entrada.setId(cursor.getInt(posId));
+      entrada.setData(cursor.getString(posData));
+      entrada.setId_produto(cursor.getInt(posIdProduto));
+      entrada.setQuantidade(cursor.getInt(posquantidade));
+
+      return entrada;
+}
+
+
+public long insert (ContentValues values){
+        return db.insert(TABLE_NAME,null,values);
+}
+ public int update(ContentValues values,String whereClause,String[] whereArgs){
+        return db.update(TABLE_NAME,values,whereClause,whereArgs);
+ }
+ public int delete (String whereClause, String[] whereArgs){
+        return db.delete(TABLE_NAME,whereClause,whereArgs);
+ }
+
+   public Cursor query (String [] colums,String selection,String [] selectionArgs,String groupBy,String having ,String orderBy){
+        return  db.query(TABLE_NAME,colums,selection,selectionArgs,
+                groupBy,having,orderBy);
+
+   }
+
+
 }

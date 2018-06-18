@@ -102,6 +102,22 @@ public class ProdutosCapilaresDBText {
          long id = tableProduto.insert(
                  BDTableProduto.getContentValues(produtosCapilares)
          );
+         assertEquals("Falha ao inserir o produto",-1,id);
+
+         //query/read C(R)UD
+
+        produtosCapilares = ReadFirstProdutoscapilares(tableProduto,"EXPERT NUTRI SHAMPOO",5,idCategory,id);
+
+        //update CR(U)D
+        produtosCapilares.setNome("EXPERT NUTRI SHAMPOO");
+        produtosCapilares.setQuantidade(5);
+
+        int rowsAffected = tableProduto.update(
+                BDTableProduto.getContentValues(produtosCapilares),
+                BDTableProduto._ID + "=?",
+                new String[]{Long.toString(id)}
+        );
+        assertEquals("Falha na atulizacao do produto",1,rowsAffected);
 
 
     }

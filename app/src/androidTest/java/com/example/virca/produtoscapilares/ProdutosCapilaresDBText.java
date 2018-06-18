@@ -119,6 +119,10 @@ public class ProdutosCapilaresDBText {
         );
         assertEquals("Falha na atulizacao do produto",1,rowsAffected);
 
+        Cursor cursor = tableProduto.query(BDTableProduto.All_COLUMNS, null,
+                null,null,null,null);
+        assertEquals("Livros encontrados após a exclusão ???",0,cursor.getCount());
+
 
     }
     private ProdutosCapilares ReadFirstProdutoscapilares( BDTableProduto tableProduto,String expectedNome,int expectedQuantidade, long expectedCategoryId,long expectedId){

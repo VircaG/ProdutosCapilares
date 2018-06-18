@@ -90,14 +90,38 @@ public class ProdutosCapilaresDBText {
 
         long idCategory = insertCategory(tableCategory,category);
 
-       // BDTableProduto
+        BDTableProduto tableProduto = new BDTableProduto(db);
+
+        //Insert/create (C)RUD
+        ProdutosCapilares produtosCapilares = new ProdutosCapilares();
+
+        produtosCapilares.setNome("EXPERT NUTRI SHAMPOO");
+         produtosCapilares.setQuantidade(5);
+         produtosCapilares.setIdCategory((int) idCategory);
+
+         long id = tableProduto.insert(
+                 BDTableProduto.getContentValues(produtosCapilares)
+         );
 
 
     }
     private ProdutosCapilares ReadFirstProdutoscapilares( BDTableProduto tableProduto,String expectedNome,int expectedQuantidade, long expectedCategoryId,long expectedId){
-        Cursor cursor = tableProduto.
+        Cursor cursor = tableProduto.query(BDTableProduto.All_COLUMNS,null,
+                null,null,null,null);
+        assertEquals("Falha ão ler o produto",1,cursor.getCount());
 
+        assertEquals("Falha ão ler o primeiro produto",cursor.moveToNext());
+
+        ProdutosCapilares produtosCapilares = BDTableProduto.getCurrentProdutosCapilaresFromCursor(cursor);
+
+        assertEquals("Nome do produto incorreto",expectedNome,produtosCapilares.getNome());
+        assertEquals("Id do produto incorreto",expectedId,produtosCapilares.getId());
+        assertEquals("Quantidade do produto incorreto",expectedQuantidade,produtosCapilares.getQuantidade());
+        assertEquals("Categoria do produto incorreto ",expectedCategoryId,produtosCapilares.getIdCategory());
+
+        return produtosCapilares;
     }
+
 
     private long insertCategory(BDTableCategory tableCategory, Category category){
         long id = tableCategory.insert(
@@ -120,6 +144,7 @@ public class ProdutosCapilaresDBText {
         Category category = BDTableCategory.getCurrentCategoryFromCursor(cursor);
         assertEquals("Nome da categoria incorrecto",expectedNome,category.getNome());
         assertEquals("ID da categoria incorreto",expectedId,category.getId());
+
 
         return category;
 

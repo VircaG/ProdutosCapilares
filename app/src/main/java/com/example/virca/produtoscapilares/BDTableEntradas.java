@@ -11,7 +11,7 @@ public class BDTableEntradas implements BaseColumns {
     public static final String FIELD_ID_PRODUTO = "id_produto";
     public static final String TABLE_NAME = "entrada";
 
-
+public static String [] ALL_COLUMNS = new  String[]{_ID,FIELD_ID_PRODUTO,FIELD_DATA,FIELD_QUANTIDADE};
 
 
     private SQLiteDatabase db;

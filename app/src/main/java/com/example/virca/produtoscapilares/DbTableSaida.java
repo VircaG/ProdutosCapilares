@@ -14,7 +14,10 @@ public class DbTableSaida implements BaseColumns {
     public static final String FIELD_QUANTIDADE = "quantidade";
     public static final String FIELD_ID_PRODUTO = "id_produto";
 
+    public static final String [] ALL_COLUMNS = new String[]{_ID,FIELD_QUANTIDADE,FIELD_DATA,FIELD_ID_PRODUTO};
+
     private SQLiteDatabase db;
+
 
     public DbTableSaida(SQLiteDatabase db){
         this.db = db;
@@ -26,8 +29,9 @@ public class DbTableSaida implements BaseColumns {
                 FIELD_QUANTIDADE + " INTEGER," +
                       "FOREIGN KEY (" + FIELD_QUANTIDADE +") REFERENCES " +BDTableEntradas.TABLE_NAME +
                          "(" + BDTableEntradas.FIELD_QUANTIDADE +
-                FIELD_ID_PRODUTO + " INTEGER," +
-                "FOREIGN KEY(" + FIELD_ID_PRODUTO + ") REFERENCES " + BDTableProduto.TABLE_NAME+
+                FIELD_ID_PRODUTO + " INTEGER ," +
+                "FOREIGN KEY (" + FIELD_ID_PRODUTO + ") REFERENCES "
+                + BDTableProduto.TABLE_NAME +
                 "(" + BDTableProduto._ID + ")" +")"
         );
     }
@@ -65,9 +69,13 @@ public class DbTableSaida implements BaseColumns {
     public int update(ContentValues values,String whereClause, String[] whereArgs){
         return db.update(TABLE_NAME,values,whereClause,whereArgs);
     }
+
+
     public int delete(String whereClause ,String[] whereArgs){
         return db.delete(TABLE_NAME,whereClause,whereArgs);
     }
+
+
     public Cursor query(String[] columns,String selection,String[] selectionArgs,
                         String groupBy,String having,String orderBy){
         return db.query(TABLE_NAME,columns,selection,selectionArgs,groupBy,having,orderBy);

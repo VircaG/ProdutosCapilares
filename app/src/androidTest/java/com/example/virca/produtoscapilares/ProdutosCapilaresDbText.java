@@ -169,7 +169,36 @@ public class ProdutosCapilaresDBText {
         return category;
 
     }
+    private long insertSaida(DbTableSaida tableSaida, Saida saida){
+        long id = tableSaida.inserte(
+                DbTableSaida.getContentValues(saida)
+        );
+        assertNotEquals("Falha ao inserir a saida",-1,id);
+        return  id;
+    }
+
+
+
+    @NonNull
+    private Saida ReadFirstSaida(DbTableSaida tableSaida,String expactedData,long espectedId, long expectedQuantidade,long expectedID_Produto){
+        Cursor cursor = tableSaida.query(DbTableSaida.ALL_COLUMNS,
+                null, null,null,
+                null,null);
+        assertEquals("Falha ão ler saida",1,cursor.getCount());
+
+        assertTrue("Falha ão ler a primeira saida",cursor.moveToNext());
+
+        Saida saida = DbTableSaida.getCurrentSaidaFromCursor(cursor);
+        assertEquals("Data saida incorecta",expactedData,saida.getData());
+        assertEquals("Id de saida incorrecta",espectedId,saida.getId());
+        assertEquals("Quantidade de saida incorrecta",expectedQuantidade,saida.getQuantidade());
+        assertEquals("ID_Produto de saida incorrecta",expectedID_Produto,saida.getId_produto());
+
+        return  saida;
+    }
+
     private Context getContext(){
         return InstrumentationRegistry.getTargetContext();
     }
+
 }

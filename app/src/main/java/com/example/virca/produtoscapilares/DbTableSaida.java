@@ -56,9 +56,9 @@ public class DbTableSaida implements BaseColumns {
        Saida saida = new Saida();
 
        saida.setId(cursor.getInt(posId));
-       saida.getData(cursor.getString(posData));
-       saida.getId_produto(cursor.getInt(posIdProduto));
-       saida.getQuantidade(cursor.getInt(posQuantidade));
+       saida.setData(cursor.getString(posData));
+       saida.setId_produto(cursor.getInt(posIdProduto));
+       saida.setQuantidade(cursor.getInt(posQuantidade));
 
        return saida;
 

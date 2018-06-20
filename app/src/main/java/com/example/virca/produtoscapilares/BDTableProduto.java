@@ -27,7 +27,8 @@ public class BDTableProduto implements BaseColumns {
                 FIELD_NOME + " TEXT NOT NULL," +
                 FIELD_QUANTIDADE + " INTENGER," +
                 FIELD_ID_CATEGORY + " INTEGER REFERENCES " + BDTableCategory.TABLE_NAME + "(" + BDTableCategory._ID + ")" +
-                ")");
+                ")"
+        );
     }
   public   static ContentValues getContentValues(ProdutosCapilares produtosCapilares) {
       ContentValues values = new ContentValues();

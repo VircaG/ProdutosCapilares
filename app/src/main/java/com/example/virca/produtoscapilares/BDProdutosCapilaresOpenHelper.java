@@ -4,12 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class BDProdutosCapilares extends SQLiteOpenHelper {
+public class BDProdutosCapilaresOpenHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "ProdutosCapilares.db";
     public static final int VERSION = 1;
 
 
-    public BDProdutosCapilares(Context context) {
+    public BDProdutosCapilaresOpenHelper(Context context) {
         super(context, DATABASE_NAME,null, VERSION);
     }
 

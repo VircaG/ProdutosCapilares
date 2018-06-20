@@ -28,7 +28,7 @@ public class BDTableCategory implements BaseColumns {
     public static ContentValues getContentValues(Category category){
         ContentValues values = new ContentValues();
 
-        values.put(_ID,category.getId());
+
         values.put(FIELD_NOME,category.getNome());
 
         return values;
@@ -54,12 +54,11 @@ public class BDTableCategory implements BaseColumns {
         return  db.update(TABLE_NAME,values,whereClause,whereArgs);
       }
 
-
-
-
-        public int delete(String whereClause,String[] whereArgs){
+      public int delete(String whereClause,String[] whereArgs){
         return db.delete(TABLE_NAME,whereClause,whereArgs);
     }
+
+
     public Cursor query(String [] columns ,String selection,
                         String[] selectionArgs,String groupBy,String having,
                         String orderBy){

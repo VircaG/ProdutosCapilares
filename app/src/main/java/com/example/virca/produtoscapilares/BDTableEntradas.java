@@ -6,12 +6,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
 public class BDTableEntradas implements BaseColumns {
+
     public static final String FIELD_QUANTIDADE = "quantidade";
     public static final String FIELD_DATA = "date";
     public static final String FIELD_ID_PRODUTO = "id_produto";
     public static final String TABLE_NAME = "entrada";
 
-public static String [] ALL_COLUMNS = new  String[]{_ID,FIELD_ID_PRODUTO,FIELD_DATA,FIELD_QUANTIDADE};
+
+    public static String [] ALL_COLUMNS = new  String[]{_ID,FIELD_ID_PRODUTO,FIELD_DATA,FIELD_QUANTIDADE};
 
 
     private SQLiteDatabase db;
@@ -33,10 +35,10 @@ public static String [] ALL_COLUMNS = new  String[]{_ID,FIELD_ID_PRODUTO,FIELD_D
     }
 
 
-    public static ContentValues getContentValues (Entrada entrada){
+    public static ContentValues getContentValues (Entradas entrada){
         ContentValues values = new ContentValues();
 
-        values.put(_ID,entrada.getId());
+
         values.put(FIELD_DATA,entrada.getData());
         values.put(FIELD_ID_PRODUTO,entrada.getId_produto());
         values.put(FIELD_QUANTIDADE,entrada.getQuantidade());
@@ -44,13 +46,13 @@ public static String [] ALL_COLUMNS = new  String[]{_ID,FIELD_ID_PRODUTO,FIELD_D
 
         return values;
     }
-public static Entrada getCurrentCategoryFromCursor(Cursor cursor){
+public static Entradas getCurrentCategoryFromCursor(Cursor cursor){
       final int posId = cursor.getColumnIndex(_ID);
       final int posData = cursor.getColumnIndex(FIELD_DATA);
       final int posIdProduto = cursor.getColumnIndex(FIELD_ID_PRODUTO);
       final int posquantidade = cursor.getColumnIndex(FIELD_QUANTIDADE);
 
-      Entrada entrada = new Entrada ();
+      Entradas entrada = new Entradas ();
 
       entrada.setId(cursor.getInt(posId));
       entrada.setData(cursor.getString(posData));

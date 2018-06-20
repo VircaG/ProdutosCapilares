@@ -27,8 +27,6 @@ public class DbTableSaida implements BaseColumns {
                 _ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
                 FIELD_DATA + " TEXT NOT  NULL ," +
                 FIELD_QUANTIDADE + " INTEGER," +
-                      "FOREIGN KEY (" + FIELD_QUANTIDADE +") REFERENCES " +BDTableEntradas.TABLE_NAME +
-                         "(" + BDTableEntradas.FIELD_QUANTIDADE +
                 FIELD_ID_PRODUTO + " INTEGER ," +
                 "FOREIGN KEY (" + FIELD_ID_PRODUTO + ") REFERENCES "
                 + BDTableProduto.TABLE_NAME +
@@ -39,7 +37,7 @@ public class DbTableSaida implements BaseColumns {
     public static ContentValues getContentValues( Saida saida){
         ContentValues values = new ContentValues();
 
-        values.put(_ID,saida.getId());
+
         values.put(FIELD_DATA,saida.getData());
         values.put(FIELD_ID_PRODUTO,saida.getId_produto());
         values.put(FIELD_QUANTIDADE,saida.getQuantidade());

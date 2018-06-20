@@ -2,7 +2,7 @@ package com.example.virca.produtoscapilares;
 
 import java.util.Date;
 
-public class Entrada {
+public class Entradas {
     private  int id;
     private int quantidade;
     private String data;

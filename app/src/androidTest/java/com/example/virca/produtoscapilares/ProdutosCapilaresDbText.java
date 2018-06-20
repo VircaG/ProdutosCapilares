@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 
-public class ProdutosCapilaresDBText {
+public class ProdutosCapilaresDbText {
     @Before
     public void setUp(){
         getContext().deleteDatabase(BDProdutosCapilares.DATABASE_NAME);

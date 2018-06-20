@@ -19,9 +19,8 @@ public class BDTableCategory implements BaseColumns {
     }
     public void create(){
         db.execSQL(
-                "CREATE TABLE " + TABLE_NAME + "(" + FIELD_NOME +
-                " TEXT NOT NULL," + _ID +
-                "INTEGER PRIMARY KEY AUTOINCREMENT)"
+                "CREATE TABLE " + TABLE_NAME + "(" + _ID + "INTEGER PRIMARY KEY AUTOINCREMENT,"
+                        + FIELD_NOME + " TEXT NOT NULL )"
         );
     }
 

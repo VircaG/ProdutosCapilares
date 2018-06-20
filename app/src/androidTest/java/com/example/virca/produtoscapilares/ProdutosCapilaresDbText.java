@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 public class ProdutosCapilaresDbText {
     @Before
     public void setUp(){
-        getContext().deleteDatabase(BDProdutosCapilares.DATABASE_NAME);
+        getContext().deleteDatabase(BDProdutosCapilaresOpenHelper.DATABASE_NAME);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class ProdutosCapilaresDbText {
         // Context of the app under test.
         Context appContext = getContext();
 
-        BDProdutosCapilares bdProdutosCapilares = new BDProdutosCapilares(appContext);
+        BDProdutosCapilaresOpenHelper bdProdutosCapilares = new BDProdutosCapilaresOpenHelper(appContext);
         SQLiteDatabase db = bdProdutosCapilares.getReadableDatabase();
 
         assertEquals("Não foi possível abrir ou criar nova Base de dados", db.isOpen());
@@ -41,7 +41,7 @@ public class ProdutosCapilaresDbText {
 
     @Test
     public  void categoryCRUDtest(){
-        BDProdutosCapilares bdProdutosCapilares = new BDProdutosCapilares(getContext());
+        BDProdutosCapilaresOpenHelper bdProdutosCapilares = new BDProdutosCapilaresOpenHelper(getContext());
 
         SQLiteDatabase db = bdProdutosCapilares.getWritableDatabase();
 
@@ -80,7 +80,7 @@ public class ProdutosCapilaresDbText {
     }
     @Test
     public void ProdutosCapilaresCRUDtest(){
-        BDProdutosCapilares bdProdutosCapilares = new BDProdutosCapilares(getContext());
+        BDProdutosCapilaresOpenHelper bdProdutosCapilares = new BDProdutosCapilaresOpenHelper(getContext());
         SQLiteDatabase db = bdProdutosCapilares.getWritableDatabase();
 
         BDTableCategory tableCategory = new BDTableCategory(db);

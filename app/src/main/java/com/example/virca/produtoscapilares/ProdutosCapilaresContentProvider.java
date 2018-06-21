@@ -169,7 +169,7 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
                 break;
 
             case SAIDA:
-                id = new BDTableSaida(db).inserte(values);
+                id = new BDTableSaida(db).insert(values);
                 break;
 
 

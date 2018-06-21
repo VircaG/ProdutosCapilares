@@ -208,12 +208,15 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
 
             case CATEGORY_ID:
                  rows = new BDTableCategory(db).delete(BDTableCategory._ID + "=?",new String[] {id});
+                 break;
 
             case ENTRADA_ID:
                 rows = new BDTableEntradas(db).delete(BDTableEntradas._ID + "=?",new String[] {id});
+                break;
 
             case SAIDA_ID:
                 rows = new BDTableSaida(db).delete(BDTableSaida._ID +"?",new String[] {id});
+                break;
 
                 default:
                     throw new UnsupportedOperationException("Uri Inválido:" + uri);
@@ -252,6 +255,7 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
 
            case SAIDA_ID:
                rows = new BDTableSaida(db).update(values, BDTableSaida._ID + "?", new String[]{id});
+               break;
 
 
            default:

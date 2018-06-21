@@ -7,20 +7,24 @@ import android.provider.BaseColumns;
 
 public class BDTableCategory implements BaseColumns {
     private static final String FIELD_NOME = "nome";
-
     public static final String TABLE_NAME = "categorias";
 
 
     public static final String  [] AllColunas = new String[] {_ID, FIELD_NOME};
+
     private SQLiteDatabase db;
 
     public BDTableCategory(SQLiteDatabase db){
         this.db = db;
     }
-    public void create(){
+
+    public void create() {
         db.execSQL(
-                "CREATE TABLE " + TABLE_NAME + "(" + _ID + "INTEGER PRIMARY KEY AUTOINCREMENT,"
-                        + FIELD_NOME + " TEXT NOT NULL )"
+                "CREATE TABLE " + TABLE_NAME + " (" +
+                        _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        FIELD_NOME + " TEXT NOT NULL" +
+                        ")"
+
         );
     }
 
@@ -32,6 +36,7 @@ public class BDTableCategory implements BaseColumns {
 
         return values;
     }
+
     public static Category getCurrentCategoryFromCursor(Cursor cursor){
      final int posId = cursor.getColumnIndex(_ID) ;
      final int postNome = cursor.getColumnIndex(FIELD_NOME);
@@ -40,18 +45,19 @@ public class BDTableCategory implements BaseColumns {
 
      category.setId(cursor.getInt(posId));
      category.setNome(cursor.getString(postNome));
+
      return  category;
 
     }
 
-    public long insert (ContentValues values){
-        return db.insert(TABLE_NAME,"null",values); }
+    public long insert (ContentValues values){ return db.insert(TABLE_NAME,null,values); }
 
 
 
       public int update(ContentValues values, String whereClause, String [] whereArgs){
         return  db.update(TABLE_NAME,values,whereClause,whereArgs);
       }
+
 
       public int delete(String whereClause,String[] whereArgs){
         return db.delete(TABLE_NAME,whereClause,whereArgs);
@@ -61,8 +67,9 @@ public class BDTableCategory implements BaseColumns {
     public Cursor query(String [] columns ,String selection,
                         String[] selectionArgs,String groupBy,String having,
                         String orderBy){
-        return db.query(TABLE_NAME,columns,selection,selectionArgs,
-                groupBy,having,orderBy);
+
+        return db.query(TABLE_NAME,columns,selection,selectionArgs, groupBy,having,orderBy);
+
 
     }
 }

@@ -22,15 +22,19 @@ public class BDTableSaida implements BaseColumns {
     public BDTableSaida(SQLiteDatabase db){
         this.db = db;
     }
-    public void creat(){
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" +
-                _ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
-                FIELD_DATA + " TEXT NOT  NULL ," +
-                FIELD_QUANTIDADE + " INTEGER," +
-                FIELD_ID_PRODUTO + " INTEGER ," +
-                "FOREIGN KEY (" + FIELD_ID_PRODUTO + ") REFERENCES "
-                + BDTableProduto.TABLE_NAME +
-                "(" + BDTableProduto._ID + ")" +")"
+
+    public void create (){
+        db.execSQL(
+                "CREATE TABLE " + TABLE_NAME + "(" +
+                    _ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    FIELD_DATA + " TEXT NOT  NULL ," +
+                    FIELD_QUANTIDADE + " INTEGER," +
+                    FIELD_ID_PRODUTO + " INTEGER ," +
+                    "FOREIGN KEY (" + FIELD_ID_PRODUTO + ") REFERENCES "
+                       + BDTableProduto.TABLE_NAME +
+                          "(" + BDTableProduto._ID + ")" +
+
+                        ")"
         );
     }
 
@@ -61,9 +65,14 @@ public class BDTableSaida implements BaseColumns {
        return saida;
 
     }
-    public  long inserte(ContentValues values ){
+
+    public  long insert(ContentValues values ){
         return db.insert(TABLE_NAME,null,values );
     }
+
+
+
+
     public int update(ContentValues values,String whereClause, String[] whereArgs){
         return db.update(TABLE_NAME,values,whereClause,whereArgs);
     }
@@ -74,10 +83,8 @@ public class BDTableSaida implements BaseColumns {
     }
 
 
-    public Cursor query(String[] columns,String selection,String[] selectionArgs,
+    public Cursor query (String[] columns, String selection , String[] selectionArgs,
                         String groupBy,String having,String orderBy){
-        return db.query(TABLE_NAME,columns,selection,selectionArgs,groupBy,having,orderBy);
+        return  db.query(TABLE_NAME,columns,selection,selectionArgs,groupBy,having,orderBy);
     }
-
-
 }

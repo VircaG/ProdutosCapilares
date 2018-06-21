@@ -21,6 +21,7 @@ public class BDTableEntradas implements BaseColumns {
     public BDTableEntradas (SQLiteDatabase db){
         this.db = db;
     }
+
     public void create(){
         db.execSQL(
                 "CREATE TABLE " + TABLE_NAME + " (" +
@@ -35,37 +36,39 @@ public class BDTableEntradas implements BaseColumns {
     }
 
 
-    public static ContentValues getContentValues (Entradas entrada){
+    public static ContentValues getContentValues (Entradas entradas){
         ContentValues values = new ContentValues();
 
 
-        values.put(FIELD_DATA,entrada.getData());
-        values.put(FIELD_ID_PRODUTO,entrada.getId_produto());
-        values.put(FIELD_QUANTIDADE,entrada.getQuantidade());
+        values.put(FIELD_DATA,entradas.getData());
+        values.put(FIELD_ID_PRODUTO,entradas.getId_produto());
+        values.put(FIELD_QUANTIDADE,entradas.getQuantidade());
 
 
         return values;
     }
-public static Entradas getCurrentCategoryFromCursor(Cursor cursor){
+public static Entradas getCurrentEntradasFromCursor(Cursor cursor){
+
       final int posId = cursor.getColumnIndex(_ID);
       final int posData = cursor.getColumnIndex(FIELD_DATA);
       final int posIdProduto = cursor.getColumnIndex(FIELD_ID_PRODUTO);
       final int posquantidade = cursor.getColumnIndex(FIELD_QUANTIDADE);
 
-      Entradas entrada = new Entradas ();
+      Entradas entradas = new Entradas ();
 
-      entrada.setId(cursor.getInt(posId));
-      entrada.setData(cursor.getString(posData));
-      entrada.setId_produto(cursor.getInt(posIdProduto));
-      entrada.setQuantidade(cursor.getInt(posquantidade));
+      entradas.setId(cursor.getInt(posId));
+      entradas.setData(cursor.getString(posData));
+      entradas.setId_produto(cursor.getInt(posIdProduto));
+      entradas.setQuantidade(cursor.getInt(posquantidade));
 
-      return entrada;
+      return entradas;
 }
 
 
 public long insert (ContentValues values){
         return db.insert(TABLE_NAME,null,values);
 }
+
  public int update(ContentValues values,String whereClause,String[] whereArgs){
         return db.update(TABLE_NAME,values,whereClause,whereArgs);
  }

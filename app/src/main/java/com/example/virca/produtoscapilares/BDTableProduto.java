@@ -9,32 +9,30 @@ import java.util.Date;
 
 public class BDTableProduto implements BaseColumns {
     public static final String FIELD_ID_CATEGORY = "idcategory";
-    public static final String FIELD_QUANTIDADE = "QUANTIDADE";
-    public static final String FIELD_NOME = "NOME";
-    public static final String TABLE_NAME = "PRODUTOS";
+    public static final String FIELD_QUANTIDADE = "quantidade";
+    public static final String FIELD_NOME = "nome";
+    public static final String TABLE_NAME = "produtos";
 
-    public  static final String [] All_COLUMNS = new String[]{_ID,FIELD_ID_CATEGORY,
-            FIELD_NOME,FIELD_QUANTIDADE};
+    public  static final String [] All_COLUMNS = new String[]{_ID,FIELD_ID_CATEGORY, FIELD_NOME,FIELD_QUANTIDADE};
+
     private SQLiteDatabase db;
 
-    public BDTableProduto (SQLiteDatabase db){
-        this.db = db;
-    }
-    public void create (){
+    public BDTableProduto (SQLiteDatabase db){ this.db = db; }
 
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" +
-                _ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                FIELD_NOME + " TEXT NOT NULL," +
-                FIELD_QUANTIDADE + " INTENGER," +
-                FIELD_ID_CATEGORY + " INTEGER REFERENCES " + BDTableCategory.TABLE_NAME + "(" + BDTableCategory._ID + ")" +
-                ")"
+    public void create (){
+        db.execSQL(
+                "CREATE TABLE " + TABLE_NAME + "(" +
+                    _ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    FIELD_NOME + " TEXT NOT NULL," +
+                    FIELD_QUANTIDADE + " INTENGER," +
+                    FIELD_ID_CATEGORY + " INTEGER REFERENCES " + BDTableCategory.TABLE_NAME + "(" + BDTableCategory._ID + ")" +
+                    ")"
         );
     }
-  public   static ContentValues getContentValues(ProdutosCapilares produtosCapilares) {
+  public   static ContentValues getContentValues( ProdutosCapilares produtosCapilares) {
       ContentValues values = new ContentValues();
 
 
-      values.put(_ID, produtosCapilares.getId());
       values.put(FIELD_NOME, produtosCapilares.getNome());
       values.put(FIELD_QUANTIDADE, produtosCapilares.getQuantidade());
       values.put(FIELD_ID_CATEGORY, produtosCapilares.getQuantidade());
@@ -50,23 +48,22 @@ public class BDTableProduto implements BaseColumns {
         final int posQuantidade = cursor.getColumnIndex(FIELD_QUANTIDADE);
         final  int posIdCategory = cursor.getColumnIndex(FIELD_ID_CATEGORY);
 
-        ProdutosCapilares produtosCapilaresl = new ProdutosCapilares();
+        ProdutosCapilares produtosCapilares = new ProdutosCapilares();
 
-        produtosCapilaresl.setId(cursor.getInt(posId));
-        produtosCapilaresl.setNome(cursor.getString(posNome));
-        produtosCapilaresl.setIdCategory(cursor.getInt(posIdCategory));
-        produtosCapilaresl.setQuantidade(cursor.getInt(posQuantidade));
+        produtosCapilares.setId(cursor.getInt(posId));
+        produtosCapilares.setNome(cursor.getString(posNome));
+        produtosCapilares.setIdCategory(cursor.getInt(posIdCategory));
+        produtosCapilares.setQuantidade(cursor.getInt(posQuantidade));
 
 
-
-        return  produtosCapilaresl;
-
-    }
-
-    public long insert (ContentValues values) {
-        return db.insert(TABLE_NAME, null, values);
+        return  produtosCapilares;
 
     }
+
+    public long insert (ContentValues values) { return db.insert(TABLE_NAME, null, values); }
+
+
+
     public int update(ContentValues values,String whereClause,String[] whereArgs){
         return db.update(TABLE_NAME,values,whereClause,whereArgs);
     }
@@ -77,7 +74,6 @@ public class BDTableProduto implements BaseColumns {
 
     public Cursor query(String[] columns,String selection,String[] selectionArgs,
                         String groupBy,String having,String orderBy){
-        return db.query(TABLE_NAME,columns,selection,selectionArgs,
-                groupBy,having,orderBy);
+        return db.query(TABLE_NAME,columns,selection,selectionArgs, groupBy,having,orderBy);
     }
 }

@@ -170,7 +170,7 @@ public class ProdutosCapilaresDbText {
 
     }
     private long insertSaida(BDTableSaida tableSaida, Saida saida){
-        long id = tableSaida.inserte(
+        long id = tableSaida.insert(
                 BDTableSaida.getContentValues(saida)
         );
         assertNotEquals("Falha ao inserir a saida",-1,id);

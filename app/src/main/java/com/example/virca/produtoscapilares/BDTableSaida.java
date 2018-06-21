@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
 
 import java.util.Calendar;
 
-public class DbTableSaida implements BaseColumns {
+public class BDTableSaida implements BaseColumns {
     public static final String TABLE_NAME = "saida";
 
     public static final String FIELD_DATA = "data";
@@ -19,7 +19,7 @@ public class DbTableSaida implements BaseColumns {
     private SQLiteDatabase db;
 
 
-    public DbTableSaida(SQLiteDatabase db){
+    public BDTableSaida(SQLiteDatabase db){
         this.db = db;
     }
     public void creat(){

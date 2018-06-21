@@ -169,9 +169,9 @@ public class ProdutosCapilaresDbText {
         return category;
 
     }
-    private long insertSaida(DbTableSaida tableSaida, Saida saida){
+    private long insertSaida(BDTableSaida tableSaida, Saida saida){
         long id = tableSaida.inserte(
-                DbTableSaida.getContentValues(saida)
+                BDTableSaida.getContentValues(saida)
         );
         assertNotEquals("Falha ao inserir a saida",-1,id);
         return  id;
@@ -180,15 +180,15 @@ public class ProdutosCapilaresDbText {
 
 
     @NonNull
-    private Saida ReadFirstSaida(DbTableSaida tableSaida,String expactedData,long espectedId, long expectedQuantidade,long expectedID_Produto){
-        Cursor cursor = tableSaida.query(DbTableSaida.ALL_COLUMNS,
+    private Saida ReadFirstSaida(BDTableSaida tableSaida, String expactedData, long espectedId, long expectedQuantidade, long expectedID_Produto){
+        Cursor cursor = tableSaida.query(BDTableSaida.ALL_COLUMNS,
                 null, null,null,
                 null,null);
         assertEquals("Falha ão ler saida",1,cursor.getCount());
 
         assertTrue("Falha ão ler a primeira saida",cursor.moveToNext());
 
-        Saida saida = DbTableSaida.getCurrentSaidaFromCursor(cursor);
+        Saida saida = BDTableSaida.getCurrentSaidaFromCursor(cursor);
         assertEquals("Data saida incorecta",expactedData,saida.getData());
         assertEquals("Id de saida incorrecta",espectedId,saida.getId());
         assertEquals("Quantidade de saida incorrecta",expectedQuantidade,saida.getQuantidade());

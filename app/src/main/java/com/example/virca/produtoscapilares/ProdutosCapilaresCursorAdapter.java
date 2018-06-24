@@ -4,28 +4,25 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class ProdutosCapilaresCursorAdapter extends RecyclerView.Adapter<ProdutosCapilaresCursorAdapter.ProdutosCapilaresViewHolder> {
-    private TextView textViewNome;
-    private TextView textViewQuantidade;
-    private int produtoId;
+     private Context context;
 
+    public ProdutosCapilaresCursorAdapter(Context context){
+        this.context = context;
+    }
 
-    //public ProdutosCapilaresViewHolder(View itemView){
-        //super(itemView);
-
-       // textViewNome TextView = itemView.findViewById(R.id.textViewNome);
-        //textViewQuantidade =(TextView)itemView.findViewById(R.id.textViewQuantidade);
-
-    //}
 
     @NonNull
     @Override
     public ProdutosCapilaresCursorAdapter.ProdutosCapilaresViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+         View item = LayoutInflater.from(context).inflate(R.layout.item_produtoscapilares,parent,false);
+
+         return new ProdutosCapilaresViewHolder(item);
     }
 
     @Override

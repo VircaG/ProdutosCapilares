@@ -14,6 +14,9 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
 
     private static  final String AUTHORITY ="com.example.virca.produtoscapilares";
 
+    public static final Uri BASE_URI = Uri.parse("content :// + AUTHORITY");
+    public static final Uri PRODUTOSCAPILARES_URI = Uri.withAppendedPath(BASE_URI,BDTableProduto.TABLE_NAME);
+
 
     public static final int PRODUTOSCAPILARES = 100;
     public static final int PRODUTOSCAPILARES_ID = 101;

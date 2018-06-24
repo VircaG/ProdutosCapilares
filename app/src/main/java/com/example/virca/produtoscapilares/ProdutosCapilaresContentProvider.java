@@ -96,8 +96,6 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
                 default:
                     throw new UnsupportedOperationException("URI Invalido:" + uri);
 
-
-
         }
 
 

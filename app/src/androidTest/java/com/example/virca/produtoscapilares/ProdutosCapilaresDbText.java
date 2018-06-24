@@ -27,20 +27,22 @@ public class ProdutosCapilaresDbText {
     }
 
     @Test
-    public void useAppContext() {
+    public void openProdutosCapilaresDbText() {
 
         // Context of the app under test.
         Context appContext = getContext();
 
         BDProdutosCapilaresOpenHelper bdProdutosCapilares = new BDProdutosCapilaresOpenHelper(appContext);
+
         SQLiteDatabase db = bdProdutosCapilares.getReadableDatabase();
 
-        assertEquals("Não foi possível abrir ou criar nova Base de dados", db.isOpen());
+        assertTrue("Não foi possível abrir ou criar nova Base de dados", db.isOpen());
         db.close();
     }
 
     @Test
     public  void categoryCRUDtest(){
+
         BDProdutosCapilaresOpenHelper bdProdutosCapilares = new BDProdutosCapilaresOpenHelper(getContext());
 
         SQLiteDatabase db = bdProdutosCapilares.getWritableDatabase();
@@ -48,12 +50,12 @@ public class ProdutosCapilaresDbText {
         BDTableCategory tableCategory = new BDTableCategory(db);
 
         Category category = new Category();
-
         category.setNome("Scifi");
 
         //Insert/create (C)RUD
         long id = insertCategory(tableCategory,category);
-         // query/read C(R)UD
+
+        // query/read C(R)UD
         category = ReadFirsCategory(tableCategory,"Scifi",id);
 
         //update CR(U)D
@@ -62,8 +64,8 @@ public class ProdutosCapilaresDbText {
                 BDTableCategory.getContentValues(category),
                 BDTableCategory._ID + "=?",
                 new String [] {Long.toString(id)}
-
                 );
+
         assertEquals("Falha na atualização da categoria",1,rowsAffected);
         //query/read C(R)UD
         category = ReadFirsCategory(tableCategory,"Sci-fi",id);
@@ -80,8 +82,10 @@ public class ProdutosCapilaresDbText {
     }
     @Test
     public void ProdutosCapilaresCRUDtest(){
-        BDProdutosCapilaresOpenHelper bdProdutosCapilares = new BDProdutosCapilaresOpenHelper(getContext());
-        SQLiteDatabase db = bdProdutosCapilares.getWritableDatabase();
+
+        BDProdutosCapilaresOpenHelper bdProdutosCapilaresOpenHelper = new BDProdutosCapilaresOpenHelper(getContext());
+
+        SQLiteDatabase db = bdProdutosCapilaresOpenHelper.getWritableDatabase();
 
         BDTableCategory tableCategory = new BDTableCategory(db);
 
@@ -91,6 +95,7 @@ public class ProdutosCapilaresDbText {
         long idCategory = insertCategory(tableCategory,category);
 
         BDTableProduto tableProduto = new BDTableProduto(db);
+
 
         //Insert/create (C)RUD
         ProdutosCapilares produtosCapilares = new ProdutosCapilares();
@@ -102,7 +107,8 @@ public class ProdutosCapilaresDbText {
          long id = tableProduto.insert(
                  BDTableProduto.getContentValues(produtosCapilares)
          );
-         assertEquals("Falha ao inserir o produto",-1,id);
+
+         assertNotEquals("Falha ao inserir o produto",-1,id);
 
          //query/read C(R)UD
 
@@ -126,18 +132,21 @@ public class ProdutosCapilaresDbText {
 
     }
     private ProdutosCapilares ReadFirstProdutoscapilares( BDTableProduto tableProduto,String expectedNome,int expectedQuantidade, long expectedCategoryId,long expectedId){
-        Cursor cursor = tableProduto.query(BDTableProduto.All_COLUMNS,null,
-                null,null,null,null);
+        Cursor cursor = tableProduto.query(BDTableProduto.All_COLUMNS,null, null,null,null,null);
+
         assertEquals("Falha ão ler o produto",1,cursor.getCount());
 
-        assertEquals("Falha ão ler o primeiro produto",cursor.moveToNext());
+        assertTrue("Falha ão ler o primeiro produto",cursor.moveToNext());
 
         ProdutosCapilares produtosCapilares = BDTableProduto.getCurrentProdutosCapilaresFromCursor(cursor);
 
         assertEquals("Nome do produto incorreto",expectedNome,produtosCapilares.getNome());
-        assertEquals("Id do produto incorreto",expectedId,produtosCapilares.getId());
-        assertEquals("Quantidade do produto incorreto",expectedQuantidade,produtosCapilares.getQuantidade());
+        assertEquals("Quantidade do produto incorreto",expectedQuantidade,produtosCapilares.getQuantidade(),0);
         assertEquals("Categoria do produto incorreto ",expectedCategoryId,produtosCapilares.getIdCategory());
+        assertEquals("Id do produto incorreto",expectedId,produtosCapilares.getId());
+
+
+
 
         return produtosCapilares;
     }
@@ -155,15 +164,14 @@ public class ProdutosCapilaresDbText {
         Cursor cursor = tableCategory.query(BDTableCategory.AllColunas, null,null, null,
                 null,null);
 
-        assertNotEquals("Falha em ler as categorias",1,
-                cursor.getCount());
+        assertEquals("Falha em ler as categorias",1, cursor.getCount());
 
         assertTrue("Falha ão ler a primeira categoria",cursor.moveToNext());
 
 
         Category category = BDTableCategory.getCurrentCategoryFromCursor(cursor);
         assertEquals("Nome da categoria incorrecto",expectedNome,category.getNome());
-        assertEquals("ID da categoria incorreto",expectedId,category.getId());
+        assertEquals("Id da categoria incorreto",expectedId,category.getId());
 
 
         return category;

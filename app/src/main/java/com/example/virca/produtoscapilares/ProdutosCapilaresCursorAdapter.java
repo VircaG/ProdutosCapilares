@@ -6,8 +6,21 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class ProdutosCapilaresCursorAdapter extends RecyclerView.Adapter<ProdutosCapilaresCursorAdapter.ProdutosCapilaresViewHolder> {
+    private TextView textViewNome;
+    private TextView textViewQuantidade;
+    private int produtoId;
+
+
+    //public ProdutosCapilaresViewHolder(View itemView){
+        //super(itemView);
+
+       // textViewNome TextView = itemView.findViewById(R.id.textViewNome);
+        //textViewQuantidade =(TextView)itemView.findViewById(R.id.textViewQuantidade);
+
+    //}
 
     @NonNull
     @Override

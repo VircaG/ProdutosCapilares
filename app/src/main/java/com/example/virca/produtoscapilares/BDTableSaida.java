@@ -26,7 +26,7 @@ public class BDTableSaida implements BaseColumns {
     public void create (){
         db.execSQL(
                 "CREATE TABLE " + TABLE_NAME + "(" +
-                    _ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     FIELD_DATA + " TEXT NOT  NULL ," +
                     FIELD_QUANTIDADE + " INTEGER," +
                     FIELD_ID_PRODUTO + " INTEGER ," +

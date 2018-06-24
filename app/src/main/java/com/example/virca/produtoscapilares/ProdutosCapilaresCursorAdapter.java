@@ -11,9 +11,17 @@ import android.widget.TextView;
 
 public class ProdutosCapilaresCursorAdapter extends RecyclerView.Adapter<ProdutosCapilaresCursorAdapter.ProdutosCapilaresViewHolder> {
      private Context context;
+     private Cursor cursor = null;
 
     public ProdutosCapilaresCursorAdapter(Context context){
         this.context = context;
+    }
+    public void refreshData(Cursor cursor){ // Atualizar dados
+        if(this.cursor != cursor){
+            this.cursor = cursor;
+            notifyDataSetChanged();
+        }
+
     }
 
 
@@ -28,17 +36,34 @@ public class ProdutosCapilaresCursorAdapter extends RecyclerView.Adapter<Produto
     @Override
     public void onBindViewHolder(@NonNull ProdutosCapilaresCursorAdapter.ProdutosCapilaresViewHolder holder, int position) {
 
+        cursor.moveToPosition(position);
+        ProdutosCapilares produtosCapilares = BDTableProduto.getCurrentProdutosCapilaresFromCursor(cursor);
+        holder.setProdutosCapilares(produtosCapilares);
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        if(cursor== null) return 0;
+
+          return cursor.getCount();
     }
 
 
     public class ProdutosCapilaresViewHolder extends RecyclerView.ViewHolder{
+         private TextView textViewNome;
+         private TextView textViewQuantidade;
+
         public ProdutosCapilaresViewHolder (View itemView){
             super(itemView);
+
+            textViewNome = (TextView) itemView.findViewById(R.id.TextViewNome);
+            textViewQuantidade = (TextView) itemView.findViewById(R.id.textViewQuantidade);
+        }
+
+        public void setProdutosCapilares(ProdutosCapilares produtosCapilares){
+             textViewNome.setText(produtosCapilares.getNome());
+             textViewQuantidade.setText(produtosCapilares.getQuantidade());
         }
     }
 }

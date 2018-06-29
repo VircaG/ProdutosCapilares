@@ -101,7 +101,7 @@ public class ProdutosCapilaresDbText {
         ProdutosCapilares produtosCapilares = new ProdutosCapilares();
 
         produtosCapilares.setNome("EXPERT NUTRI SHAMPOO");
-         produtosCapilares.setQuantidade(5);
+         produtosCapilares.setQuantidade(1);
          produtosCapilares.setIdCategory((int) idCategory);
 
          long id = tableProduto.insert(
@@ -112,11 +112,11 @@ public class ProdutosCapilaresDbText {
 
          //query/read C(R)UD
 
-        produtosCapilares = ReadFirstProdutoscapilares(tableProduto,"EXPERT NUTRI SHAMPOO",5,idCategory,id);
+        produtosCapilares = ReadFirstProdutoscapilares(tableProduto,"EXPERT NUTRI SHAMPOO",1,idCategory,id);
 
         //update CR(U)D
         produtosCapilares.setNome("EXPERT NUTRI SHAMPOO");
-        produtosCapilares.setQuantidade(5);
+        produtosCapilares.setQuantidade(1);
 
         int rowsAffected = tableProduto.update(
                 BDTableProduto.getContentValues(produtosCapilares),
@@ -127,7 +127,7 @@ public class ProdutosCapilaresDbText {
 
         Cursor cursor = tableProduto.query(BDTableProduto.All_COLUMNS, null,
                 null,null,null,null);
-        assertEquals("Livros encontrados após a exclusão ???",0,cursor.getCount());
+        assertEquals("Produtos encontrados após a exclusão ???",1,cursor.getCount());
 
 
     }

@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends AppCompatActivity  {
 
     private static final int PRODUTOSCAPILARES_CURSOR_LOADER_ID = 0;
    // public static  final String PRODUTOSCAPILARES_ID = "PRODUTOSCAPILARES_ID";
@@ -46,42 +46,45 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //fab.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick(View view) {
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        //.setAction("Action", null).show();
 
 
-            }
-        });
-    }
-    public Loader <Cursor> onCreateLoader(int id, @Nullable Bundle args){
-        if (id == PRODUTOSCAPILARES_CURSOR_LOADER_ID) {
-            return  new CursorLoader(this,ProdutosCapilaresContentProvider.BASE_URI,BDTableProduto.All_COLUMNS,null,null,null);
-        }
-        return null;
+          //  }
+       // });
+  //  }
 
-    }
 
-    @Override
-    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-        produtosCapilaresCursorAdapter.refreshData(data);
 
-    }
+        // public Loader <Cursor> onCreateLoader(int id, @Nullable Bundle args){
+        //if (id == PRODUTOSCAPILARES_CURSOR_LOADER_ID) {
+            //return  new CursorLoader(this,ProdutosCapilaresContentProvider.BASE_URI,BDTableProduto.All_COLUMNS,null,null,null);
+        //}
+      //  return null;
 
-    @Override
-    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-        produtosCapilaresCursorAdapter.refreshData(null);
+   // }
 
-    }
+    //@Override
+   // public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+       // produtosCapilaresCursorAdapter.refreshData(data);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+   // }
+
+   // @Override
+  //  public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+     //   produtosCapilaresCursorAdapter.refreshData(null);
+
+   // }
+
+    //@Override
+  //  public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        //return true;
     }
 
     @Override

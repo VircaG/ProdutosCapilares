@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 public class ProdutosCapilaresContentProvider extends ContentProvider {
-
     private static  final String AUTHORITY ="com.example.virca.produtoscapilares";
 
     public static final Uri BASE_URI = Uri.parse("content :// + AUTHORITY");
@@ -20,10 +19,13 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
 
     public static final int PRODUTOSCAPILARES = 100;
     public static final int PRODUTOSCAPILARES_ID = 101;
+
     public static final int CATEGORY = 200;
     public static final int CATEGORY_ID = 201;
+
     public static final int ENTRADA = 300;
     public static final int ENTRADA_ID = 301;
+
     public static final int SAIDA = 400;
     public static final int SAIDA_ID = 401;
 

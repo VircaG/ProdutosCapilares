@@ -16,6 +16,7 @@ public class ProdutosCapilaresCursorAdapter extends RecyclerView.Adapter<Produto
     public ProdutosCapilaresCursorAdapter(Context context){
         this.context = context;
     }
+
     public void refreshData(Cursor cursor){ // Atualizar dados
         if(this.cursor != cursor){
             this.cursor = cursor;

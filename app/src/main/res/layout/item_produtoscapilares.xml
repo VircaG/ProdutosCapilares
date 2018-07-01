@@ -35,6 +35,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:targetApi="o"
-        tools:text="5" />
+        tools:text="1" />
 
 </android.support.constraint.ConstraintLayout>

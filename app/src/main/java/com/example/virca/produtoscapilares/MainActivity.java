@@ -18,10 +18,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity  {
-
+public class MainActivity extends AppCompatActivity  implements LoaderManager.LoaderCallbacks< Cursor> {
     private static final int PRODUTOSCAPILARES_CURSOR_LOADER_ID = 0;
-   // public static  final String PRODUTOSCAPILARES_ID = "PRODUTOSCAPILARES_ID";
+
+    // public static  final String PRODUTOSCAPILARES_ID = "PRODUTOSCAPILARES_ID";
 
 
     private ProdutosCapilaresCursorAdapter produtosCapilaresCursorAdapter;
@@ -36,56 +36,50 @@ public class MainActivity extends AppCompatActivity  {
         setSupportActionBar(toolbar);
 
         recyclerViewProdutosCapilares = (RecyclerView) findViewById(R.id.recyclerViewProdutosCapilares);
-
-
         recyclerViewProdutosCapilares.setLayoutManager(new LinearLayoutManager(this));
+
         produtosCapilaresCursorAdapter = new ProdutosCapilaresCursorAdapter(this);
         recyclerViewProdutosCapilares.setAdapter(produtosCapilaresCursorAdapter);
 
-        getLoaderManager().initLoader(PRODUTOSCAPILARES_CURSOR_LOADER_ID,null,(android.app.LoaderManager.LoaderCallbacks<Cursor>)this);
+        getLoaderManager().initLoader(PRODUTOSCAPILARES_CURSOR_LOADER_ID, null, (android.app.LoaderManager.LoaderCallbacks<Cursor>) this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getLoaderManager().restartLoader(PRODUTOSCAPILARES_CURSOR_LOADER_ID,null,this);
+    }
+
+    @NonNull
+    @Override
+
+    public Loader<Cursor> onCreateLoader(int id,@Nullable Bundle args){
+        if(id == PRODUTOSCAPILARES_CURSOR_LOADER_ID){
+            return new CursorLoader(this,ProdutosCapilaresContentProvider.PRODUTOSCAPILARES_URI,BDTableProduto.All_COLUMNS,null,null,null);
+            }
+            return null;
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+        produtosCapilaresCursorAdapter.refreshData(data);
+
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull android.support.v4.content.Loader<Cursor> loader) {
+        produtosCapilaresCursorAdapter.refreshData(null);
+
+    }
 
 
-
-        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        //fab.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        //.setAction("Action", null).show();
-
-
-          //  }
-       // });
-  //  }
-
-
-
-        // public Loader <Cursor> onCreateLoader(int id, @Nullable Bundle args){
-        //if (id == PRODUTOSCAPILARES_CURSOR_LOADER_ID) {
-            //return  new CursorLoader(this,ProdutosCapilaresContentProvider.BASE_URI,BDTableProduto.All_COLUMNS,null,null,null);
-        //}
-      //  return null;
-
-   // }
-
-    //@Override
-   // public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-       // produtosCapilaresCursorAdapter.refreshData(data);
-
-   // }
-
-   // @Override
-  //  public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-     //   produtosCapilaresCursorAdapter.refreshData(null);
-
-   // }
 
     //@Override
   //  public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.menu_main, menu);
         //return true;
-    }
+    //}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

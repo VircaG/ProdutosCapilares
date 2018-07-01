@@ -32,6 +32,7 @@ public class BDTableCategory implements BaseColumns {
         ContentValues values = new ContentValues();
 
 
+        values.put(_ID,category.getId());
         values.put(FIELD_NOME,category.getNome());
 
         return values;

@@ -29,10 +29,10 @@ public class BDTableProduto implements BaseColumns {
                     ")"
         );
     }
-  public   static ContentValues getContentValues( ProdutosCapilares produtosCapilares) {
+  public  static ContentValues getContentValues( ProdutosCapilares produtosCapilares) {
       ContentValues values = new ContentValues();
 
-
+      values.put(_ID,produtosCapilares.getId());
       values.put(FIELD_NOME, produtosCapilares.getNome());
       values.put(FIELD_QUANTIDADE, produtosCapilares.getQuantidade());
       values.put(FIELD_ID_CATEGORY, produtosCapilares.getQuantidade());
@@ -74,6 +74,7 @@ public class BDTableProduto implements BaseColumns {
 
     public Cursor query(String[] columns,String selection,String[] selectionArgs,
                         String groupBy,String having,String orderBy){
-        return db.query(TABLE_NAME,columns,selection,selectionArgs, groupBy,having,orderBy);
+        Cursor cursor = db.query(TABLE_NAME,columns,selection,selectionArgs,groupBy,having,orderBy);
+        return cursor;
     }
 }

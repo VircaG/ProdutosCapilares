@@ -30,11 +30,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="?android:attr/colorError"
-        android:textSize="24sp"
+        android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="o"
         tools:text="1" />
-
 </android.support.constraint.ConstraintLayout>

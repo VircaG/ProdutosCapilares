@@ -52,8 +52,9 @@ public class BDTableProduto implements BaseColumns {
 
         produtosCapilares.setId(cursor.getInt(posId));
         produtosCapilares.setNome(cursor.getString(posNome));
-        produtosCapilares.setIdCategory(cursor.getInt(posIdCategory));
         produtosCapilares.setQuantidade(cursor.getInt(posQuantidade));
+        produtosCapilares.setIdCategory(cursor.getInt(posIdCategory));
+
 
 
         return  produtosCapilares;

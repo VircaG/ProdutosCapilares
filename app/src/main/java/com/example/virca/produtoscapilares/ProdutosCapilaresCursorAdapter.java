@@ -12,8 +12,11 @@ import android.widget.TextView;
 public class ProdutosCapilaresCursorAdapter extends RecyclerView.Adapter<ProdutosCapilaresCursorAdapter.ProdutosCapilaresViewHolder> {
      private Context context;
      private Cursor cursor = null;
+     private View.OnClickListener viewHolderClickListener = null;
+     private int lastProdutosCapilaresClicked = -1;
 
-    public ProdutosCapilaresCursorAdapter(Context context){
+
+     public ProdutosCapilaresCursorAdapter(Context context){
         this.context = context;
     }
 
@@ -25,17 +28,23 @@ public class ProdutosCapilaresCursorAdapter extends RecyclerView.Adapter<Produto
 
     }
 
+    public void setViewHolderClickListener(View.OnClickListener viewHolderClickListener){
+         this.viewHolderClickListener = viewHolderClickListener;
+    }
+    public int getLastProdutosCapilaresClicked(){return lastProdutosCapilaresClicked ;}
+
+
 
     @NonNull
     @Override
-    public ProdutosCapilaresCursorAdapter.ProdutosCapilaresViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProdutosCapilaresViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
          View item = LayoutInflater.from(context).inflate(R.layout.item_produtoscapilares,parent,false);
 
          return new ProdutosCapilaresViewHolder(item);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProdutosCapilaresCursorAdapter.ProdutosCapilaresViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProdutosCapilaresViewHolder holder, int position) {
 
         cursor.moveToPosition(position);
         ProdutosCapilares produtosCapilares = BDTableProduto.getCurrentProdutosCapilaresFromCursor(cursor);
@@ -51,20 +60,36 @@ public class ProdutosCapilaresCursorAdapter extends RecyclerView.Adapter<Produto
     }
 
 
-    public class ProdutosCapilaresViewHolder extends RecyclerView.ViewHolder{
+    public class ProdutosCapilaresViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
          private TextView textViewNome;
          private TextView textViewQuantidade;
+         private int produtosCapilaresId;
 
         public ProdutosCapilaresViewHolder (View itemView){
             super(itemView);
 
             textViewNome = (TextView) itemView.findViewById(R.id.TextViewNome);
             textViewQuantidade = (TextView) itemView.findViewById(R.id.textViewQuantidade);
+
+            itemView.setOnClickListener(this);
         }
 
         public void setProdutosCapilares(ProdutosCapilares produtosCapilares){
              textViewNome.setText(produtosCapilares.getNome());
              textViewQuantidade.setText(produtosCapilares.getQuantidade());
+             produtosCapilaresId = produtosCapilares.getId();
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+             if (position == RecyclerView.NO_POSITION){
+                 return;
+             }
+             if (viewHolderClickListener != null){
+                 lastProdutosCapilaresClicked = produtosCapilaresId;
+                 viewHolderClickListener.onClick(v);
+             }
         }
     }
 }

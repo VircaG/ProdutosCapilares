@@ -15,17 +15,15 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
 
     public static final Uri BASE_URI = Uri.parse("content :// + AUTHORITY");
     public static final Uri PRODUTOSCAPILARES_URI = Uri.withAppendedPath(BASE_URI,BDTableProduto.TABLE_NAME);
+    public static final Uri CATEGORIES_URI = Uri.withAppendedPath(BASE_URI, BDTableCategory.TABLE_NAME);
 
 
     public static final int PRODUTOSCAPILARES = 100;
     public static final int PRODUTOSCAPILARES_ID = 101;
-
     public static final int CATEGORY = 200;
     public static final int CATEGORY_ID = 201;
-
     public static final int ENTRADA = 300;
     public static final int ENTRADA_ID = 301;
-
     public static final int SAIDA = 400;
     public static final int SAIDA_ID = 401;
 
@@ -33,11 +31,7 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
     private static final String MULTIPLE_ITEMS = "vnd.android.cursor.dir";
     private  static  final String SINGLE_INTEM = "vnd.android.cursor.item";
 
-    BDProdutosCapilaresOpenHelper  bdProdutoCapilaresOpenHelper;
-
-
-
-
+    BDProdutosCapilaresOpenHelper produtosCapilaresOpenHelper;
 
     private static UriMatcher getProdutosCapilaresUriMatcher(){
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -58,7 +52,7 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
 
         }
         public boolean onCreate(){
-        bdProdutoCapilaresOpenHelper  = new BDProdutosCapilaresOpenHelper(getContext());
+        produtosCapilaresOpenHelper  = new BDProdutosCapilaresOpenHelper(getContext());
 
         return true;
     }
@@ -66,7 +60,7 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        SQLiteDatabase db = bdProdutoCapilaresOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = produtosCapilaresOpenHelper.getReadableDatabase();
 
         String id = uri.getLastPathSegment();
 
@@ -102,9 +96,6 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
                     throw new UnsupportedOperationException("URI Invalido:" + uri);
 
         }
-
-
-
 
     }
 
@@ -152,7 +143,7 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        SQLiteDatabase db = bdProdutoCapilaresOpenHelper.getWritableDatabase();
+        SQLiteDatabase db = produtosCapilaresOpenHelper.getWritableDatabase();
 
         UriMatcher matcher = getProdutosCapilaresUriMatcher();
         long id = -1;
@@ -196,7 +187,7 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
     }
 
     public int delete(@NonNull Uri uri,@Nullable String selection,@Nullable String[] selectionArgs){
-        SQLiteDatabase db = bdProdutoCapilaresOpenHelper.getWritableDatabase();
+        SQLiteDatabase db = produtosCapilaresOpenHelper.getWritableDatabase();
 
         UriMatcher matcher = getProdutosCapilaresUriMatcher();
 
@@ -233,7 +224,7 @@ public class ProdutosCapilaresContentProvider extends ContentProvider {
     }
 
    public int update(@NonNull Uri uri,@Nullable ContentValues values,@Nullable String selection,@Nullable String[] selectionArgs) {
-       SQLiteDatabase db = bdProdutoCapilaresOpenHelper.getWritableDatabase();
+       SQLiteDatabase db = produtosCapilaresOpenHelper.getWritableDatabase();
 
        UriMatcher matcher = getProdutosCapilaresUriMatcher();
 
